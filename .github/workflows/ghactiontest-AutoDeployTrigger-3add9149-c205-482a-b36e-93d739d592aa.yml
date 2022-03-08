@@ -26,7 +26,7 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v1
         with:
-          registry: mycontainerappregistry.azurecr.io
+          registry: haroonftstregistry.azurecr.io
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: mycontainerappregistry.azurecr.io/ghactiontest:${{ github.sha }}
+          tags: haroonftstregistry.azurecr.io/ghactiontest:${{ github.sha }}
           context: ./
 
 
@@ -56,4 +56,4 @@ jobs:
             echo "Installing containerapp extension"
             az extension add --source https://workerappscliextension.blob.core.windows.net/azure-cli-extension/containerapp-0.2.0-py2.py3-none-any.whl --yes
             echo "Starting Deploying"
-            az containerapp update -n ghactiontest -g my-container-apps -i mycontainerappregistry.azurecr.io/ghactiontest:${{ github.sha }} --registry-login-server mycontainerappregistry.azurecr.io --registry-username  ${{ secrets.REGISTRY_USERNAME }} --registry-password ${{ secrets.REGISTRY_PASSWORD }} --debug
+            az containerapp update -n ghactiontest -g my-container-apps -i haroonftstregistry.azurecr.io/ghactiontest:${{ github.sha }} --registry-login-server haroonftstregistry.azurecr.io --registry-username  ${{ secrets.REGISTRY_USERNAME }} --registry-password ${{ secrets.REGISTRY_PASSWORD }} --debug
